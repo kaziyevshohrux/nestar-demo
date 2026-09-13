@@ -3,16 +3,16 @@ import { Stack } from "@mui/material";
 
 const Advertisement = () => {
   return (
-    <Stack className={"advertisement"}>
+    <Stack className={"video-frame"}>
       <video
-        className={"video"}
         autoPlay
         muted
         loop
         playsInline
+        preload="auto"
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
       >
-        <source src={"/video/ads.mov"} type="video/quicktime" />
-        <source src={"/video/ads.mov"} type="video/mp4" />
+        <source src="/video/ads.mov" type="video/mp4" />
       </video>
     </Stack>
   );

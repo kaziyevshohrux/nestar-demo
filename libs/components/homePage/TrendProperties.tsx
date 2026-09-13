@@ -3,11 +3,13 @@ import { Stack, Box } from "@mui/material";
 import WestIcon from "@mui/icons-material/West";
 import EastIcon from "@mui/icons-material/East";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
 import TrendPropertyCard from "./TrendPropertyCard";
 
-
-const TrendProperties = ({ initialInput = [1, 2, 3, 4, 5, 6, 7], ...props }: any) => {
-  const [trendProperties, setTrendProperties] = useState<number[]>(initialInput);
+const TrendProperties = () => {
+  const [trendProperties, setTrendProperties] = useState<number[]>([
+    1, 2, 3, 4, 5, 6, 7,
+  ]);
 
   return (
     <Stack className={"trend-properties"}>
@@ -30,6 +32,7 @@ const TrendProperties = ({ initialInput = [1, 2, 3, 4, 5, 6, 7], ...props }: any
             <Box className={"empty-list"}>Trends Empty</Box>
           ) : (
             <Swiper
+              modules={[Navigation, Pagination]}
               className={"trend-property-swiper"}
               slidesPerView={"auto"}
               spaceBetween={15}
@@ -39,13 +42,16 @@ const TrendProperties = ({ initialInput = [1, 2, 3, 4, 5, 6, 7], ...props }: any
               }}
               pagination={{
                 el: ".swiper-trend-pagination",
+                clickable: true,
               }}
             >
-              {trendProperties.map((property, index) => (
-                <SwiperSlide key={index} className={"trend-property-slide"}>
-                  <TrendPropertyCard />
-                </SwiperSlide>
-              ))}
+              {trendProperties.map((property, index) => {
+                return (
+                  <SwiperSlide key={index} className={"trend-property-slide"}>
+                    <TrendPropertyCard />
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
           )}
         </Stack>

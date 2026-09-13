@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Stack, Box } from "@mui/material";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 import TopAgentCard from "./TopAgentCard";
-import Link from "next/link";
 
-
-const TopAgents = ({ initialInput = [1, 2, 3, 4, 5, 6, 7], ...props }: any) => {
-  const [topAgents, setTopAgents] = useState<number[]>(initialInput);
+const TopAgents = (props: any) => {
+  const [topAgents, setTopAgents] = useState<number[]>([1, 2, 3, 4, 5, 6, 7]);
 
   return (
     <Stack className={"top-agents"}>
@@ -18,39 +18,38 @@ const TopAgents = ({ initialInput = [1, 2, 3, 4, 5, 6, 7], ...props }: any) => {
           </Box>
           <Box className={"right"}>
             <div className={"more-box"}>
-              <Link href={"/agent"}>
-                <span>See All Agents</span>
-              </Link>
-              <img src={"/img/icons/rightup.svg"} alt={""} />
+              <span>See All Agents</span>
+              <img src="/img/icons/rightup.svg" alt="" />
             </div>
           </Box>
         </Stack>
-        <Stack className={"card-box"}>
-          {topAgents.length === 0 ? (
-            <Box className={"empty-list"}>Agents Empty</Box>
-          ) : (
+        <Stack className={"wrapper"}>
+          <Box className={"switch-btn swiper-agents-prev"}>
+            <ArrowBackIosNewIcon />
+          </Box>
+          <Box className={"card-wrapper"}>
             <Swiper
-              className={"top-agent-swiper"}
+              modules={[Navigation]}
+              className={"top-agents-swiper"}
               slidesPerView={"auto"}
-              spaceBetween={30}
+              spaceBetween={29}
               navigation={{
-                nextEl: ".swiper-agent-next",
-                prevEl: ".swiper-agent-prev",
+                nextEl: ".swiper-agents-next",
+                prevEl: ".swiper-agents-prev",
               }}
             >
-              <div className={"swiper-agent-prev"}>
-                <img src={"/img/icons/prev.svg"} alt={""} />
-              </div>
-              {topAgents.map((agent, index) => (
-                <SwiperSlide key={index} className={"top-agent-slide"}>
-                  <TopAgentCard />
-                </SwiperSlide>
-              ))}
-              <div className={"swiper-agent-next"}>
-                <img src={"/img/icons/next.svg"} alt={""} />
-              </div>
+              {topAgents.map((agent, index) => {
+                return (
+                  <SwiperSlide className={"top-agents-slide"} key={index}>
+                    <TopAgentCard />
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
-          )}
+          </Box>
+          <Box className={"switch-btn swiper-agents-next"}>
+            <ArrowBackIosNewIcon />
+          </Box>
         </Stack>
       </Stack>
     </Stack>
