@@ -1,23 +1,22 @@
 import withLayoutBasic from "@/libs/components/layout/LayoutBasic";
+import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
+import { Stack } from "@mui/material";
 import { NextPage } from "next";
-import { useState } from "react";
+
 
 const CS: NextPage = () => {
 
-  const [title, setTitle] = useState<string>("hello");
+ const device = useDeviceDetect();
+
+  if (device === "mobile") {
+    return <Stack>CS MOBILE</Stack>;
+  } else {
 
   return (
-    <div>
-      CS "{title}"
-
-      <button
-        onClick={() => alert("Hello MIT")}
-        style={{ margin: "15px" }}
-      >
-        PressMe
-      </button>
-    </div>
+     <div style={{ margin: "20px 0" }}>
+        <Stack className="container">CS</Stack>
+      </div>
   );
 };
-
+}
 export default withLayoutBasic(CS);

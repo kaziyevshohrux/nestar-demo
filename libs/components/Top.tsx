@@ -3,8 +3,35 @@ import { Box, Stack } from "@mui/material";
 import Link from "next/link";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import useDeviceDetect from "../hooks/useDeviceDetect";
 
 const Top = () => {
+  const device = useDeviceDetect();
+  if (device === "mobile") {
+    return (
+      <Stack className={"navbar"}>
+        <Link href={"/"}>
+          <div>Home</div>
+        </Link>
+
+        <Link href={"/property"}>
+          <div>Properties</div>
+        </Link>
+
+        <Link href={"/agent"}>
+          <div>Agents</div>
+        </Link>
+
+        <Link href={"/community"}>
+          <div>Community</div>
+        </Link>
+
+        <Link href={"/cs"}>
+          <div>CS</div>
+        </Link>
+      </Stack>
+    );
+  } else {
   return (
     <Stack className={"navbar"}>
       <Stack className={"navbar-main"}>
@@ -62,5 +89,5 @@ const Top = () => {
     </Stack>
   );
 };
-
+}
 export default Top;

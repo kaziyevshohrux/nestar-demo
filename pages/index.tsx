@@ -8,10 +8,19 @@ import { Box, Container, Stack } from "@mui/material";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { use } from "react";
+import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 
 import { NextPage } from "next";
 
 const Home: NextPage=()=>{
+   //DEVICE: MOBILE vs PC
+
+  const device = useDeviceDetect();
+
+  if (device === "mobile") {
+    return <Stack>HOMEPAGE MOBILE</Stack>;
+  } else {
   return (
     
       <Stack className={"home-page"}>
@@ -23,5 +32,5 @@ const Home: NextPage=()=>{
       </Stack>
   );
 }
-
+}
 export default withLayoutMain(Home)
